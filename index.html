@@ -292,6 +292,60 @@ body:not([data-view="game"]) .golden { display: none; }
   .pop { animation-duration: .01s; animation-delay: .6s; }
 }
 </style>
+<style id="oggames-arcade-redesign">
+/* OGgames arcade home refresh: scoped to the hub; game logic and game view stay unchanged. */
+#hub { position: relative; isolation: isolate; color: #f5f4ff; }
+#hub::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(900px 620px at 12% 12%, rgba(104, 78, 255, .22), transparent 70%), radial-gradient(760px 520px at 92% 35%, rgba(57, 231, 190, .12), transparent 70%), linear-gradient(180deg, #0b0e1b, #080b15 58%, #0b0d18); }
+.topbar { width: min(1160px, calc(100% - 32px)); min-height: 68px; box-sizing: border-box; margin: 14px auto 10px; padding: 12px 16px; position: relative; z-index: 5; border: 1px solid rgba(255, 255, 255, .09); border-radius: 20px; background: rgba(12, 15, 29, .78); backdrop-filter: blur(18px); }
+.topbar .brand { color: #f7f6ff; letter-spacing: .01em; }
+.topbar .brand .logo { box-shadow: 0 0 0 3px rgba(124, 245, 209, .12), 0 8px 24px rgba(0, 0, 0, .28); }
+#hub.wrap { width: min(1160px, calc(100% - 32px)); max-width: none; box-sizing: border-box; margin: 0 auto; padding: clamp(24px, 5vw, 62px) 0 84px; gap: 22px; }
+#hub .hero { min-height: clamp(300px, 34vw, 410px); box-sizing: border-box; grid-template-columns: minmax(0, 1fr) minmax(150px, 250px); gap: clamp(14px, 4vw, 48px); padding: clamp(30px, 6vw, 72px); border: 1px solid rgba(255, 255, 255, .13); border-radius: 32px; background: radial-gradient(circle at 82% 48%, rgba(255, 207, 74, .18), transparent 27%), radial-gradient(circle at 18% 0%, rgba(123, 97, 255, .3), transparent 48%), linear-gradient(135deg, #171b31, #101321 72%); box-shadow: 0 28px 80px rgba(0, 0, 0, .36), inset 0 1px 0 rgba(255, 255, 255, .06); }
+#hub .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit; opacity: .28; background-image: linear-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .07) 1px, transparent 1px); background-size: 42px 42px; }
+#hub .hero-copy { position: relative; z-index: 2; max-width: 650px; }
+#hub .eyebrow { margin: 0 0 16px; color: #7cf5d1; font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+#hub .hero h1 { margin: 0; font-size: clamp(4rem, 10vw, 7.5rem); line-height: .88; letter-spacing: -.075em; background: linear-gradient(105deg, #fff 12%, #c5b7ff 54%, #7cf5d1 98%); background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 14px 24px rgba(117, 89, 255, .18)); }
+#hub .lede { max-width: 34ch; margin: 18px 0 24px; color: #b9bfd4; font-size: clamp(1rem, 1.7vw, 1.22rem); line-height: 1.6; }
+#hub .hero-cta { display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px; border: 1px solid rgba(124, 245, 209, .48); border-radius: 999px; background: rgba(124, 245, 209, .11); color: #d8fff3; font-size: .92rem; font-weight: 700; text-decoration: none; transition: background .18s ease, transform .18s ease, box-shadow .18s ease; }
+#hub .hero-cta span { color: #7cf5d1; font-size: 1.2rem; }
+#hub .hero-cta:hover { transform: translateY(-2px); background: rgba(124, 245, 209, .19); box-shadow: 0 10px 30px rgba(61, 228, 188, .13); }
+#hub .hero-cta:focus-visible, #hub a.card:focus-visible { outline: 3px solid #7cf5d1; outline-offset: 4px; }
+#hub .hero-ball { position: relative; z-index: 1; order: 1; width: min(100%, 240px); justify-self: end; filter: drop-shadow(0 24px 22px rgba(255, 193, 47, .25)); }
+#hub .float { opacity: .46; filter: drop-shadow(0 0 12px rgba(124, 245, 209, .24)); }
+#hub .sec { display: flex; align-items: center; gap: 12px; margin: 50px 0 0; color: #f7f6ff; font-size: 1.15rem; letter-spacing: .12em; text-transform: uppercase; }
+#hub .sec::before { content: ""; width: 22px; height: 3px; border-radius: 99px; background: linear-gradient(90deg, #7cf5d1, #a78bfa); }
+#hub .cards { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px; }
+#hub .card { border: 1px solid rgba(255, 255, 255, .1); border-radius: 24px; background: linear-gradient(155deg, rgba(30, 35, 57, .96), rgba(16, 20, 33, .98)); box-shadow: 0 18px 42px rgba(0, 0, 0, .24); }
+#hub a.card { transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+#hub a.card:hover { transform: translateY(-6px); border-color: rgba(124, 245, 209, .46); box-shadow: 0 28px 58px rgba(0, 0, 0, .36), 0 0 32px rgba(124, 245, 209, .08); }
+#hub .thumb { height: 205px; border-bottom: 1px solid rgba(255, 255, 255, .08); background: radial-gradient(circle at 50% 55%, rgba(255, 204, 67, .22), transparent 29%), linear-gradient(135deg, #29254e, #151b30 72%); }
+#hub .thumb::before { content: "FEATURED GAME"; position: absolute; z-index: 2; top: 16px; left: 16px; padding: 7px 10px; border: 1px solid rgba(255, 255, 255, .13); border-radius: 999px; background: rgba(12, 15, 29, .58); color: #e2e5f5; font-size: .64rem; font-weight: 800; letter-spacing: .15em; backdrop-filter: blur(10px); }
+#hub .t-ball { width: 102px; height: 102px; margin: -51px 0 0 -51px; filter: drop-shadow(0 12px 16px rgba(255, 194, 42, .22)); }
+#hub .t-dot { width: 21px; height: 21px; margin: -10.5px 0 0 -10.5px; filter: drop-shadow(0 3px 6px rgba(255, 194, 42, .18)); }
+#hub .card-body { padding: 20px 22px 22px; gap: 11px; }
+#hub .card h3 { color: #f7f6ff; font-size: 1.4rem; }
+#hub .card p { color: #b8bfd3; line-height: 1.55; }
+#hub .pill { padding: 5px 10px; border-color: rgba(255, 255, 255, .1); background: rgba(255, 255, 255, .055); color: #c5cbe0; }
+#hub .card-foot .stat { color: #a8b1c8; }
+#hub .play { padding: 9px 17px; background: linear-gradient(110deg, #8ff5d5, #c8ff8d); color: #111827; box-shadow: 0 8px 22px rgba(124, 245, 209, .15); }
+#hub .card.soon { min-height: 260px; border: 1px dashed rgba(255, 255, 255, .17); border-radius: 24px; background: linear-gradient(145deg, rgba(255, 255, 255, .035), rgba(124, 245, 209, .035)); }
+#hub .card.soon::before { content: "UP NEXT"; display: block; margin-bottom: 10px; color: #7cf5d1; font-size: .68rem; font-weight: 800; letter-spacing: .18em; }
+#hub .card.soon p { color: #aeb5ca; }
+@media (max-width: 640px) {
+  .topbar { width: calc(100% - 24px); min-height: 60px; margin-top: 10px; padding: 10px 12px; }
+  #hub.wrap { width: calc(100% - 24px); padding-top: 24px; }
+  #hub .hero { min-height: 0; grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 28px 22px; border-radius: 26px; }
+  #hub .hero h1 { font-size: clamp(3.5rem, 16vw, 5.2rem); }
+  #hub .hero-ball { order: 1; width: 132px; justify-self: end; margin-top: -4px; }
+  #hub .float { display: none; }
+  #hub .sec { margin-top: 34px; }
+  #hub .thumb { height: 180px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hub .hero-ball, #hub .float { animation: none !important; }
+  #hub a.card, #hub .hero-cta { transition: none !important; }
+}
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -327,10 +381,12 @@ body:not([data-view="game"]) .golden { display: none; }
     <span class="float" style="--s:24px;--x:72%;--y:84%;--d:-4s"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#vmini"></use></svg></span>
     <span class="float" style="--s:18px;--x:95%;--y:58%;--d:-2s"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#vmini"></use></svg></span>
     <span class="float" style="--s:26px;--x:55%;--y:42%;--d:-5s"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#vmini"></use></svg></span>
-    <div>
-      <h1>OGgames</h1>
-      <p class="lede">Small games starring one very round, very yellow ball.</p>
-    </div>
+    <div class="hero-copy">
+        <p class="eyebrow">OG ARCADE</p>
+        <h1>OGgames</h1>
+        <p class="lede">Small games. Big replay energy.</p>
+        <a class="hero-cta" href="#gh">Browse the games <span aria-hidden="true">&rarr;</span></a>
+      </div>
     <svg class="hero-ball" viewBox="0 0 200 200" aria-hidden="true"><use href="#vmini"></use></svg>
   </section>
   <h2 class="sec" id="gh">Games</h2>
